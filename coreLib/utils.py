@@ -10,11 +10,6 @@ from __future__ import print_function
 from termcolor import colored
 import os 
 import gdown
-from PIL import Image, ImageEnhance
-import numpy as np 
-from shapely.geometry import Polygon
-import pyclipper
-import cv2
 #---------------------------------------------------------------
 def LOG_INFO(msg,mcolor='blue'):
     '''
@@ -39,9 +34,7 @@ def create_dir(base,ext):
 #---------------------------------------------------------------
 def download(id,save_dir):
     gdown.download(id=id,output=save_dir,quiet=False)
-#------------------------------------
-# region-utils 
-#-------------------------------------
+#---------------------------------------------------------------
 def intersection(boxA, boxB):
     # boxA=ref
     # boxB=sig
@@ -72,19 +65,3 @@ def localize_box(box,region_boxes):
     if max_ival==0:
         return None
     return box_id
-#---------------------------------------------------------------
-def create_mask(image,regions,shrink_ratio=0.4):
-    h,w,_=image.shape
-    mask=np.zeros((h,w))
-        
-    for region in regions:
-        polygon = np.array(region).reshape((-1, 2)).tolist()
-        polygon = Polygon(polygon)
-        distance = polygon.area * (1 - np.power(shrink_ratio, 2)) / polygon.length
-        subject = [tuple(l) for l in region]
-        padding = pyclipper.PyclipperOffset()
-        padding.AddPath(subject, pyclipper.JT_ROUND, pyclipper.ET_CLOSEDPOLYGON)
-        shrinked = padding.Execute(-distance)
-        shrinked = np.array(shrinked[0]).reshape(-1, 2)
-        cv2.fillPoly(mask, [shrinked.astype(np.int32)], 1)
-    return mask
