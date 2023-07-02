@@ -93,6 +93,7 @@ def upload():
             return jsonify({"result":res,"output":text})
             
         except Exception as e:
+             print(e)
              return jsonify({"error":consttruct_error("","INTERNAL_SERVER_ERROR","500","","please try again with a different image")})
     
     return jsonify({"error":consttruct_error("","INTERNAL_SERVER_ERROR","500","","please try again with a different image")})
