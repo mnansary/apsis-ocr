@@ -64,7 +64,6 @@ class OCR(object):
         line_refs=[lr for lr in line_refs if lr is not None]
         # sort line refs based on Y-axis
         line_refs=sorted(line_refs,key=lambda x:x[1])     
-        print(line_refs)         
         # word_boxes
         word_refs=[]
         for bno in range(len(word_boxes)):
@@ -87,7 +86,6 @@ class OCR(object):
             _,bids=zip(*sorted(zip(_boxes,_bids),key=lambda x: x[0][0]))
             for idx,bid in enumerate(bids):
                 _dict={"line_no":line,"word_no":idx,"crop_id":bid,"poly":word_boxes[bid]}
-                print(_dict)
                 text_dict.append(_dict)
         data=pd.DataFrame(text_dict)
         return data
