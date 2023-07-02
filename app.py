@@ -13,8 +13,8 @@ import numpy as np
 import requests
 import pandas as pd
 import cv2 
-OCR_API="http://172.20.4.53:3032/ocr"
-#OCR_API="http://192.168.10.110:3032/ocr"
+#OCR_API="http://172.20.4.53:3032/ocr"
+OCR_API="http://192.168.10.110:3032/ocr"
 #--------------------------------------------------
 # main
 #--------------------------------------------------
