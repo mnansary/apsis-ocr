@@ -8,7 +8,6 @@ from __future__ import print_function
 # ---------------------------------------------------------
 import cv2 
 import numpy as np 
-import matplotlib.pyplot as plt 
 import copy
 #----------------------------------detector------------------------
 class Detector(object):
@@ -77,7 +76,7 @@ class Detector(object):
         '''
         result= model.ocr(img,rec=False)
         boxes= np.array(result, dtype=np.float32)
-        boxes=self.sorted_boxes(boxes)
+        boxes=np.squeeze(np.array(self.sorted_boxes(boxes))) # the shape of boxes mismatch
         crops=[]
         for bno in range(len(boxes)):
             tmp_box = copy.deepcopy(boxes[bno])

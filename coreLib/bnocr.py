@@ -99,7 +99,7 @@ def correctPadding(img,dim,pvalue=255):
 class BanglaOCR(object):
     def __init__(self,
                 model_weights,
-                providers=['CUDAExecutionProvider'],
+                providers=['CUDAExecutionProvider','CPUExecutionProvider'],
                 img_height=32,
                 img_width=256,
                 pos_max=40):
