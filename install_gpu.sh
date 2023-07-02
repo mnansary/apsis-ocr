@@ -1,6 +1,7 @@
 
 #!/bin/sh
 conda install cudatoolkit
+conda install cudnn
 pip install flask flask_cors termcolor gdown numpy bnunicodenormalizer streamlit
 pip install onnxruntime-gpu
 pip uninstall protobuf -y
